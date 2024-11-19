@@ -3,6 +3,7 @@ import { envs } from "./config/env.js";
 import bookRouter from '../src/routes/book.routes.js'
 import mongoose from "mongoose";
 import morgan from "morgan";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app=express()
 
@@ -16,6 +17,7 @@ const db=mongoose.connection
 
 app.use('/api', bookRouter);
 
+app.use(errorHandler)
 app.listen(envs.port, () => {
     console.log(`Server started on port ${envs.port}`);
 });
